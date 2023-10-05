@@ -9,10 +9,6 @@ st.title("Task 1 - Cryptarithmetic Puzzle")
 # Request user input
 equation = st.text_input("Enter the cryptarithmetic puzzle")
 
-# Run main if input exists
-if equation:
-    main()
-
 # Define main function
 def main():
 
@@ -94,3 +90,8 @@ def main():
 
     # Print solution
     st.write('\nSolution:', output)
+
+
+# Run main if input exists
+if equation:
+    main()
