@@ -5,7 +5,7 @@ import re
 
 # Write title and description
 st.title("Task 1 - Cryptarithmetic Puzzle")
-st.subheader("A cryptarithmetic puzzle is a word puzzle using a formula. Instead of using numbers, it uses letters, which each get assigned a number in the solution.\nAn operation is entered in the following manner: X . Y = Z. The . is replaced with any of the following signs: + - * /")
+st.write("A cryptarithmetic puzzle is a word puzzle using a formula. Instead of using numbers, it uses letters, which each get assigned a number in the solution.\nAn operation is entered in the following manner: X . Y = Z. The . is replaced with any of the following signs: + - * /")
 
 # Request user input
 equation = st.text_input("Enter the cryptarithmetic puzzle")
@@ -18,7 +18,7 @@ def main():
 
     # Guard clause - Assure length is 5
     if len(segments) != 5:
-        raise IndexError("The equation must be formatted as A . B = C")
+        raise Exception("The equation must be formatted as A . B = C")
 
     # Retrieve individual words and sign
     first_word = segments[0].upper()
@@ -29,10 +29,10 @@ def main():
 
     # Guard clause - Assure sign is a valid sign
     if sign not in ["+", "-", "*", "/"]:
-        raise ValueError("The sign must be any of the following signs: + - * /")
+        raise Exception("The sign must be any of the following signs: + - * /")
     # Guard clause - Assure equals sign is an equals sign
     if equals_sign != "=":
-        raise ValueError("The equals sign must be: =")
+        raise Exception("The equals sign must be: =")
 
     # Put words into list
     words = [first_word, second_word, result_word]
@@ -46,7 +46,7 @@ def main():
 
     # Guard clause - Assure 10 variables exist at most
     if len(variables) > 10:
-        raise ValueError("There may only be a maximum of 10 different letters in the equation.")
+        raise Exception("There may only be a maximum of 10 different letters in the equation.")
 
     # Retrieve first letter of each word for altered domain
     first_letters = []
