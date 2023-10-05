@@ -12,25 +12,28 @@ equation = st.text_input("Enter the cryptarithmetic puzzle")
 # Define main function
 def main():
 
-    words = equation.split(" ")
+    # Split equation into segments
+    segments = equation.split(" ")
 
-    # Guard clause
-    if len(words) != 5:
+    # Guard clause - Assure length is 5
+    if len(segments) != 5:
         raise IndexError("Equation must be formatted as A . B = C")
 
     # Retrieve individual words and sign
-    first_word = words[0]
-    second_word = words[2]
-    result_word = words[4]
-    sign = words[1]
+    first_word = segments[0]
+    sign = segments[1]
+    second_word = segments[2]
+    equals_sign = segments[3]
+    result_word = segments[4]
 
-    # Guard clauses
+    # Guard clause - Assure sign is a valid sign
     if sign not in ["+", "-", "*", "/"]:
         raise ValueError("The sign must be + - * or /")
-    if words[3] != "=":
-        raise AssertionError
+    # Guard clause - Assure equals sign is an equals sign
+    if equals_sign != "=":
+        raise ValueError("The equals sign must be =")
 
-    # Put words into iterative list
+    # Put words into list
     words = [first_word, second_word, result_word]
 
     # Define variables
@@ -86,10 +89,16 @@ def main():
 
     # Define and solve problem based on variables, domains and constraints
     problem = CspProblem(variables, domains, constraints)
-    output = backtrack(problem)
+    solution = backtrack(problem)
 
     # Print solution
-    st.write('\nSolution:', output)
+    output = ""
+    for letter in equation:
+        if letter not in output:
+            output += letter
+        else:
+            output += solution[letter]
+    st.write(output)
 
 
 # Run main if input exists
