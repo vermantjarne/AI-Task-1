@@ -13,7 +13,7 @@ words = equation.split(" ")
 
 # Guard clause
 if len(words) != 5:
-    IndexError("Equation must be formatted as A . B = C")
+    raise IndexError("Equation must be formatted as A . B = C")
 
 # Retrieve individual words and sign
 first_word = words[0]
@@ -23,7 +23,7 @@ sign = words[1]
 
 # Guard clauses
 if sign not in ["+", "-", "*", "/"]:
-    ValueError("Sign must be + - * or /")
+    raise ValueError("The sign must be + - * or /")
 
 # Put words into iterative list
 words = [first_word, second_word, result_word]
