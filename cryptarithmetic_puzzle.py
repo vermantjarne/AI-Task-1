@@ -9,15 +9,21 @@ st.title("Task 1 - Cryptarithmetic Puzzle")
 # Request user input
 equation = st.text_input("Enter the cryptarithmetic puzzle")
 
-while not re.match(".* . .* . .*", equation):
-    ""
+words = equation.split(" ")
+
+# Guard clause
+if len(words) != 5:
+    IndexError("Equation must be formatted as A . B = C")
 
 # Retrieve individual words and sign
-words = equation.split(" ")
 first_word = words[0]
 second_word = words[2]
 result_word = words[4]
 sign = words[1]
+
+# Guard clauses
+if sign not in ["+", "-", "*", "/"]:
+    ValueError("Sign must be + - * or /")
 
 # Put words into iterative list
 words = [first_word, second_word, result_word]
@@ -78,4 +84,4 @@ problem = CspProblem(variables, domains, constraints)
 output = backtrack(problem)
 
 # Print solution
-st.write('\nSolutions:', output)
+st.write('\nSolution:', output)
