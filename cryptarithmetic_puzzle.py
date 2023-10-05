@@ -95,9 +95,9 @@ def main():
     output = ""
     for letter in equation:
         if letter not in output:
-            output += letter
+            output += str(letter)
         else:
-            output += solution[letter]
+            output += str(solution[letter])
     st.write(output)
 
 
