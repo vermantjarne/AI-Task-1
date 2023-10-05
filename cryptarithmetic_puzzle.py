@@ -3,8 +3,9 @@ from simpleai.search import CspProblem, backtrack
 import streamlit as st
 import re
 
-# Set title
+# Write title and description
 st.title("Task 1 - Cryptarithmetic Puzzle")
+st.subheader("A cryptarithmetic puzzle is a word puzzle using a formula. Instead of using numbers, it uses letters, which each get assigned a number in the solution.\nAn operation is entered in the following manner: X . Y = Z. The . is replaced with any of the following signs: + - * /")
 
 # Request user input
 equation = st.text_input("Enter the cryptarithmetic puzzle")
@@ -17,21 +18,21 @@ def main():
 
     # Guard clause - Assure length is 5
     if len(segments) != 5:
-        raise IndexError("Equation must be formatted as A . B = C")
+        raise IndexError("The equation must be formatted as A . B = C")
 
     # Retrieve individual words and sign
-    first_word = segments[0]
+    first_word = segments[0].upper()
     sign = segments[1]
-    second_word = segments[2]
+    second_word = segments[2].upper()
     equals_sign = segments[3]
-    result_word = segments[4]
+    result_word = segments[4].upper()
 
     # Guard clause - Assure sign is a valid sign
     if sign not in ["+", "-", "*", "/"]:
-        raise ValueError("The sign must be + - * or /")
+        raise ValueError("The sign must be any of the following signs: + - * /")
     # Guard clause - Assure equals sign is an equals sign
     if equals_sign != "=":
-        raise ValueError("The equals sign must be =")
+        raise ValueError("The equals sign must be: =")
 
     # Put words into list
     words = [first_word, second_word, result_word]
@@ -42,6 +43,10 @@ def main():
         for letter in word:
             if letter not in variables:
                 variables.append(letter)
+
+    # Guard clause - Assure 10 variables exist at most
+    if len(variables) > 10:
+        raise ValueError("There may only be a maximum of 10 different letters in the equation.")
 
     # Retrieve first letter of each word for altered domain
     first_letters = []
@@ -91,7 +96,7 @@ def main():
     problem = CspProblem(variables, domains, constraints)
     solution = backtrack(problem)
 
-    # Print solution
+    # Print solution if found. Alternatively, print text message.
     output = ""
     if solution == None:
         output = "No solution was found."
@@ -101,6 +106,7 @@ def main():
                 output += str(letter)
             else:
                 output += str(solution[letter])
+    st.write(equation)
     st.write(output)
 
 
