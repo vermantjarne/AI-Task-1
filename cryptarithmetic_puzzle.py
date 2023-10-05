@@ -1,13 +1,16 @@
 # Imports
 from simpleai.search import CspProblem, backtrack
 import streamlit as st
+import re
 
 # Set title
 st.title("Task 1 - Cryptarithmetic Puzzle")
-st.write("TEST")
 
 # Request user input
 equation = st.text_input("Enter the cryptarithmetic puzzle")
+
+while not re.match(".* . .* . .*", equation):
+    ""
 
 # Retrieve individual words and sign
 words = equation.split(" ")
