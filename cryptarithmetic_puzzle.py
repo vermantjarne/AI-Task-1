@@ -94,7 +94,7 @@ def main():
     # Print solution
     output = ""
     for letter in equation:
-        if letter not in output:
+        if letter not in solution:
             output += str(letter)
         else:
             output += str(solution[letter])
