@@ -93,11 +93,14 @@ def main():
 
     # Print solution
     output = ""
-    for letter in equation:
-        if letter not in solution:
-            output += str(letter)
-        else:
-            output += str(solution[letter])
+    if solution == None:
+        output = "No solution was found."
+    else:
+        for letter in equation:
+            if letter not in solution:
+                output += str(letter)
+            else:
+                output += str(solution[letter])
     st.write(output)
 
 
